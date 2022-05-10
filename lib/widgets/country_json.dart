@@ -27,7 +27,7 @@ class _SelectCountryState extends State<SelectCountry> {
 
   Future _getData() async {
     final String response =
-        await rootBundle.loadString('assets/json/Codes.json');
+        await rootBundle.loadString('assets/json/country.json');
     dataRetrieved = await json.decode(response) as List<dynamic>;
     setState(() {
       data = dataRetrieved;
