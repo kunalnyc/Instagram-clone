@@ -1,4 +1,4 @@
-# real_chat
+# Magenta Platforms
 
 A new Flutter project.
 
