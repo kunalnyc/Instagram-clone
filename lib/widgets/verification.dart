@@ -1,6 +1,7 @@
 import 'package:cupertino_list_tile/cupertino_list_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:real_chat/widgets/country_json.dart';
 
 class OneStepVerification extends StatefulWidget {
   const OneStepVerification({Key? key}) : super(key: key);
@@ -10,7 +11,12 @@ class OneStepVerification extends StatefulWidget {
 }
 
 class _OneStepVerificationState extends State<OneStepVerification> {
-  final _enterPhoneNumber = TextEditingController();
+
+  var _enterPhoneNumber = TextEditingController();
+  Map<String, dynamic> data = {"name": "United States", "code":"+1"};
+    late Map<String, dynamic> dataResults;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,19 +52,24 @@ class _OneStepVerificationState extends State<OneStepVerification> {
               ),
             ),
             CupertinoListTile(
-              onTap: () {},
-              title: const Text(
-                "United States",
-                style: TextStyle(color: Colors.pinkAccent),
+              onTap: () async {
+              dataResults = await  Navigator.push(context, CupertinoPageRoute(builder: (context)=>SelectCountry()));
+              setState(() {
+                if(dataResults != null) data =dataResults;
+              });
+              },
+              title:  Text(
+                data['name'],
+                style: const  TextStyle(color: Colors.pinkAccent),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  const Text(
-                    "+12",
-                    style: TextStyle(
+                   Text(
+                    data['code'],
+                    style: const TextStyle(
                         fontSize: 25, color: CupertinoColors.inactiveGray),
                   ),
                   Expanded(

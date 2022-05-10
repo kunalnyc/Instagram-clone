@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       title: 'Magenta',
-      home:  SelectCountry(),
+      home:  Welcome(),
     );
   }
 }
