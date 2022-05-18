@@ -1,6 +1,7 @@
 import 'package:cupertino_list_tile/cupertino_list_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:real_chat/Authentication/auth_service.dart';
 import 'package:real_chat/widgets/country_json.dart';
 
 class OneStepVerification extends StatefulWidget {
@@ -93,7 +94,17 @@ class _OneStepVerificationState extends State<OneStepVerification> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: CupertinoButton(color: CupertinoColors.systemPink, 
-                  child: const Text("Request Code"), onPressed: () {}),
+                  child: const Text("Request Code"), onPressed: () {
+
+                  Navigator.push(context, CupertinoPageRoute(
+                    builder: (context)=> VerifyNumber(
+                      number: data['code']! + _enterPhoneNumber.text,
+                    )
+                  )
+                  );
+
+
+                  }),
             )
           ],
         ),

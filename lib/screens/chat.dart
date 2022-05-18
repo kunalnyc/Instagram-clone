@@ -15,6 +15,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  var _searchController = TextEditingController();
+  var searchValue = "";
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -35,8 +37,19 @@ class _ChatScreenState extends State<ChatScreen> {
           {
             return (CustomScrollView(slivers: [
               const CupertinoSliverNavigationBar(
+                leading: Icon(CupertinoIcons.person_add),
                 largeTitle: Text("Messages"),
               ),
+               SliverToBoxAdapter(
+              child: CupertinoSearchTextField(
+                onChanged: (value) {
+                  setState(() {
+                    searchValue = value;
+                  });
+                },
+                controller: _searchController,
+              ),
+            ),
               SliverList(
                   delegate: SliverChildListDelegate(
                       snapshot.data!.docs.map((DocumentSnapshot document) {

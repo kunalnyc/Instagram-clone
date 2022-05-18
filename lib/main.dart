@@ -4,6 +4,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:real_chat/Authentication/auth_service.dart';
 import 'package:real_chat/screens/home.dart';
 import 'package:real_chat/widgets/country_json.dart';
 // import 'package:real_chat/widgets/json.dart';
@@ -20,10 +21,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return const  MaterialApp(
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
       title: 'Magenta',
+      // theme: widgit.appTheme.lightTheme,
+      // darkTheme: widgit.appTheme.darkTheme,
       home:  Welcome(),
     );
   }
