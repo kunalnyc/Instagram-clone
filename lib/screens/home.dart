@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
+import 'package:provider/provider.dart';
 import 'package:real_chat/chats/lib.dart';
 // import 'package:real_chat/chats/chat_messages.dart';
 import 'package:real_chat/screens/chat.dart';
 import 'package:real_chat/screens/home_page.dart';
 import 'package:real_chat/screens/users.dart';
+import 'package:real_chat/utils/provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -15,13 +17,20 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-
   @override
-  void initState() {
+  void initState()  {
     super.initState();
+     addData();
     chatState.refreshChatsForCurrentUser();
   }
 
+  addData() async {
+    UserProvider _userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    await _userProvider.refreshUser();
+  }
+
+  // chatState.refreshChatsForCurrentUser();
   @override
   Widget build(BuildContext context) => CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
@@ -47,7 +56,7 @@ class _HomepageState extends State<Homepage> {
             case 0:
               return const MyHomePage();
             case 1:
-              return Users();
+              return People();
             case 2:
               return const Text("Hello ji");
             case 3:

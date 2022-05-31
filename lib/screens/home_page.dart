@@ -1,7 +1,21 @@
+// import 'dart:typed_data';
+
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:real_chat/api/post.dart';
+// import 'package:real_chat/api/options.dart';
+// import 'package:real_chat/api/post.dart';
 import 'package:real_chat/chats/chats.dart';
+import 'package:real_chat/utils/provider.dart';
+// import 'package:real_chat/screens/options.dart';
+import 'package:real_chat/utils/utils.dart'as model;
+
+
 // import 'package:real_chat/chats/chat_messages.dart';
 // import 'package:real_chat/chats/chat_messages.dart';
 
@@ -13,23 +27,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // get data => null;
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: (CupertinoPageScaffold(
-      child: CustomScrollView(slivers: [
-        CupertinoSliverNavigationBar(
-            leading: const CircleAvatar(
-              backgroundImage: NetworkImage(
-                  "https://images.unsplash.com/photo-1616190419596-e2839e7380d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8a2FzaG1pcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"),
+      body: (CupertinoPageScaffold(
+        child: CustomScrollView(slivers: [
+          CupertinoSliverNavigationBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: ((context) => const AddPostScreen())));
+              },
+              icon: const Icon(CupertinoIcons.add),
             ),
-            largeTitle: const Text("Magenta"),
+            largeTitle: const  Text('Magenta'),
             trailing: (CupertinoButton(
               onPressed: () {
                 Navigator.push(context,
-                    CupertinoPageRoute(builder: ((context) => const Chats())));            
+                    CupertinoPageRoute(builder: ((context) => const Chats())));
               },
               child: Badge(
                 badgeContent: const Text("1"),
@@ -40,8 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   size: 35,
                 )),
               ),
-            ))),
-      ]),
-    )));
+            )),
+          ),
+        ]),
+      )),
+    );
   }
 }
