@@ -20,6 +20,13 @@ class User {
 
   static User fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
+    var newSnapshot = <String, dynamic>{};
+
+    snapshot.forEach((key, value) {
+      newSnapshot[key.trim()] = value;
+    });
+
+    snapshot = newSnapshot;
 
     return User(
       username: snapshot["username"],
