@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,6 +6,7 @@ import 'package:real_chat/Logic/auth_logic.dart';
 import 'package:real_chat/screens/home.dart';
 import 'package:real_chat/utils/utils.dart';
 import 'package:real_chat/widgets/text_field.dart';
+import 'package:real_chat/widgets/verification.dart';
 
 class EmailS extends StatefulWidget {
   const EmailS({Key? key}) : super(key: key);
@@ -58,8 +58,8 @@ class _EmailState extends State<EmailS> {
     if (res == 'Success') {
       showSnackBar(context, res);
     } else {
-      Navigator.of(context)
-          .pushReplacement(CupertinoPageRoute(builder: (context) => const Homepage()));
+      Navigator.of(context).pushReplacement(
+          CupertinoPageRoute(builder: (context) => const Homepage()));
     }
   }
 
@@ -155,13 +155,15 @@ class _EmailState extends State<EmailS> {
                           )
                         : const Text(
                             'Sign up',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                     width: double.infinity,
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     decoration: const ShapeDecoration(
-                      color: Colors.blueAccent,
+                      color: CupertinoColors.systemPink,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(4),
@@ -183,18 +185,24 @@ class _EmailState extends State<EmailS> {
                   children: [
                     Container(
                       child: const Text(
-                        'Dont have an account?',
+                        'Want To Signing With Phone Number?',
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
-                    Container(
-                      child: const Text(
-                        ' Signup.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).push(
+                          CupertinoPageRoute(
+                              builder: (context) =>
+                                  const OneStepVerification())),
+                      child: Container(
+                        child: const Text(
+                          ' Phone.',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                   ],
                 )

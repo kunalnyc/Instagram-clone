@@ -20,7 +20,6 @@ class _EmailState extends State<Email> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -49,7 +48,7 @@ class _EmailState extends State<Email> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: CupertinoPageScaffold(
         child: SafeArea(
           child: Container(
@@ -66,7 +65,7 @@ class _EmailState extends State<Email> {
                 Padding(
                   padding: const EdgeInsets.all(100),
                   child: Image.asset(
-                    'assets/logo.png',
+                    'assets/Magen.png',
                     height: 100,
                   ),
                 ),
@@ -97,14 +96,16 @@ class _EmailState extends State<Email> {
                             radius: 20,
                           ))
                         : const Text(
-                            'Continue',
-                            style: TextStyle(color: Colors.white),
+                            'Login',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                     width: double.infinity,
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     decoration: const ShapeDecoration(
-                      color: Colors.blueAccent,
+                      color: CupertinoColors.systemPink,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(4),

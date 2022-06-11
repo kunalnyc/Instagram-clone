@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:real_chat/Auth/auth.dart';
 import 'package:real_chat/widgets/verification.dart';
 // import 'package:real_chat/widgets/welcome_text.dart';
 
@@ -19,7 +20,7 @@ class Welcome extends StatelessWidget {
           shape: BoxShape.rectangle,
           image: DecorationImage(
             image: NetworkImage(
-                "https://images.unsplash.com/photo-1625795145919-fcffd2712e39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"),
+                "https://images.unsplash.com/photo-1570872626485-d8ffea69f463?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2x1YnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"),
             fit: BoxFit.fill,
           ),
         ),
@@ -37,8 +38,9 @@ class Welcome extends StatelessWidget {
                     //  Text("Hello"),
                     const CircleAvatar(
                       radius: 80,
+              
                       backgroundImage: NetworkImage(
-                          "https://images.unsplash.com/photo-1556035511-3168381ea4d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmlnaHQlMjBjbHVifGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"),
+                          "https://images.unsplash.com/photo-1556035511-3168381ea4d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2x1YnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"),
                     ),
                     const Text(
                       "Magenta",
@@ -93,7 +95,7 @@ class Welcome extends StatelessWidget {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                                builder: ((context) => const OneStepVerification())));
+                                builder: ((context) => const Email())));
                       },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,

@@ -9,12 +9,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter_chat_types/flutter_chat_types.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:real_chat/Logic/storage.dart';
-import 'package:real_chat/utils/models.dart'as model;
+import 'package:real_chat/utils/models.dart' as model;
 
 class AuthLogics {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
 
   // get user details
   Future<model.User> getUserDetails() async {
@@ -95,5 +94,9 @@ class AuthLogics {
       res = error.toString();
     }
     return res;
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }

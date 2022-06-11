@@ -1,11 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:provider/provider.dart';
+// import 'package:real_chat/Logic/preview.dart';
 import 'package:real_chat/chats/lib.dart';
+import 'package:real_chat/screens/Notifications/notify.dart';
 // import 'package:real_chat/chats/chat_messages.dart';
 import 'package:real_chat/screens/chat.dart';
 import 'package:real_chat/screens/home_page.dart';
+import 'package:real_chat/screens/profile.dart';
+import 'package:real_chat/screens/profile_screen.dart';
 import 'package:real_chat/screens/users.dart';
 import 'package:real_chat/utils/provider.dart';
 
@@ -34,6 +39,9 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) => CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
+          activeColor: Colors.pinkAccent,
+          backgroundColor: Colors.black,
+          inactiveColor: Colors.white,
           onTap: (index) {
             // ignore: avoid_print
             print("Clicked Tab $index");
@@ -60,10 +68,10 @@ class _HomepageState extends State<Homepage> {
             case 2:
               return const Text("Hello ji");
             case 3:
-              return const Text("Hello ji");
+              return const Notify();
             case 4:
             default:
-              return const Text("Hello jjjji");
+              return ProfileScreen(uid: FirebaseAuth.instance.currentUser!.uid,);
           }
         },
       );

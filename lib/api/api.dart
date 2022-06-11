@@ -7,6 +7,7 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_6.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_7.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_8.dart';
+import 'package:real_chat/Themes/colors.dart';
 
 class ChatDetail extends StatefulWidget {
   final friendUid;
@@ -107,12 +108,16 @@ class _ChatDetailState extends State<ChatDetail> {
         if (snapshot.hasData) {
           var data;
           return Scaffold(
+            backgroundColor: mobileBackgroundColor,
             body: CupertinoPageScaffold(
               navigationBar: CupertinoNavigationBar(
+                backgroundColor: mobileBackgroundColor,
                 middle: Text(
                   friendName,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 previousPageTitle: "Back",
                 trailing: CupertinoButton(
@@ -155,7 +160,7 @@ class _ChatDetailState extends State<ChatDetail> {
                                   constraints: BoxConstraints(
                                     maxWidth:
                                         MediaQuery.of(context).size.width * 0.7,
-                                        // minHeight: 10,m
+                                    // minHeight: 10,m
                                     maxHeight: 30,
                                   ),
                                   child: Column(
@@ -163,7 +168,7 @@ class _ChatDetailState extends State<ChatDetail> {
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
-                                            // crossAxisAlignment: CrossAxisAlignment.end,
+                                        // crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           Text(data['msg'],
                                               style: TextStyle(
@@ -210,13 +215,13 @@ class _ChatDetailState extends State<ChatDetail> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         IconButton(
-                            color: Colors.blueAccent,
+                            color: CupertinoColors.systemPink,
                             iconSize: 40,
                             onPressed: () {},
                             icon:
                                 const Icon(CupertinoIcons.camera_circle_fill)),
                         IconButton(
-                            color: Colors.blueAccent,
+                            color: CupertinoColors.systemPink,
                             iconSize: 30,
                             onPressed: () {},
                             icon: const Icon(CupertinoIcons.link)),
@@ -224,16 +229,19 @@ class _ChatDetailState extends State<ChatDetail> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 18.0),
                             child: CupertinoTextField(
+                              cursorColor: CupertinoColors.activeGreen,
                               placeholder: " Message...",
                               controller: _textController,
                             ),
                           ),
                         ),
                         CupertinoButton(
-                            child: const Icon(CupertinoIcons.paperplane_fill),
+                            child: const Icon(
+                              CupertinoIcons.paperplane_fill,
+                              color: CupertinoColors.activeGreen,
+                            ),
                             onPressed: () => sendMessage(_textController.text))
                       ],
-                      
                     )
                   ],
                 ),

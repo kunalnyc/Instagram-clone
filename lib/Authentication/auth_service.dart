@@ -4,7 +4,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// import 'package:real_chat/Auth/phone_auth.dart';
+import 'package:real_chat/Auth/regester.dart';
 import 'package:real_chat/Authentication/user_info.dart';
+import 'package:real_chat/Themes/colors.dart';
 
 enum Status { Waiting, Error }
 
@@ -51,7 +54,7 @@ class _VerifyNumberState extends State<VerifyNumber> {
           .signInWithCredential(credential)
           .then((value) {
             Navigator.push(
-                context, CupertinoPageRoute(builder: (context) =>UserName()));
+                context, CupertinoPageRoute(builder: (context) =>  const EmailS()));
           })
           .whenComplete(() {})
           .onError((error, stackTrace) {
@@ -66,9 +69,15 @@ class _VerifyNumberState extends State<VerifyNumber> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: mobileBackgroundColor,
       body: CupertinoPageScaffold(
+        backgroundColor: mobileBackgroundColor,
         navigationBar: const CupertinoNavigationBar(
-          middle: Text("Verify Number"),
+          backgroundColor: mobileBackgroundColor,
+          middle: Text(
+            "Verify Number",
+            style: TextStyle(color: CupertinoColors.white),
+          ),
           previousPageTitle: "Edit Number",
         ),
         child: _status != Status.Error
@@ -76,15 +85,14 @@ class _VerifyNumberState extends State<VerifyNumber> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Center(
+                  const Center(
                     child: Text("OTP Verification",
                         style: TextStyle(
-                            color: Color(0xFF08C187).withOpacity(0.7),
-                            fontSize: 30)),
+                            color: CupertinoColors.white, fontSize: 30)),
                   ),
                   const Text("Enter OTP sent to",
                       style: TextStyle(
-                          color: CupertinoColors.secondaryLabel, fontSize: 20)),
+                          color: CupertinoColors.systemPink, fontSize: 20)),
                   Text(phoneNumber == null ? "" : phoneNumber),
                   CupertinoTextField(
                       onChanged: (value) async {
@@ -135,7 +143,7 @@ class _VerifyNumberState extends State<VerifyNumber> {
                         setState(() {
                           this._status = Status.Waiting;
                         });
-    
+
                         _verifyPhoneNumber();
                       }),
                 ],

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:real_chat/chats/lib.dart';
 import 'package:real_chat/screens/home.dart';
@@ -23,9 +22,7 @@ class _UserNameState extends State<UserName> {
 
   @override
   void initState() {
-    _text.text = (FirebaseAuth.instance.currentUser?.displayName != null
-        ? FirebaseAuth.instance.currentUser?.displayName
-        : '')!;
+    _text.text = (FirebaseAuth.instance.currentUser?.displayName ?? '');
     super.initState();
   }
 
@@ -68,28 +65,33 @@ class _UserNameState extends State<UserName> {
                   ),
                 ),
                 onPressed: () => usersState.takeImageFromCamera()),
-            Text("Enter your name"),
+            const Text(
+              "Enter your name",
+              style: TextStyle(color: Colors.white),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 55),
               child: CupertinoTextField(
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 25),
+                style: const TextStyle(fontSize: 25),
                 maxLength: 15,
                 controller: _text,
                 keyboardType: TextInputType.name,
-                autofillHints: <String>[AutofillHints.name],
+                autofillHints: const <String>[AutofillHints.name],
               ),
             ),
             CupertinoButton.filled(
-                child: Text("Continue"),
+                child: const Text("Continue"),
                 onPressed: () {
                   FirebaseAuth.instance.currentUser
                       ?.updateDisplayName(_text.text);
-    
+
                   usersState.createOrUpdateUserInFirestore(_text.text);
-    
-                  Navigator.push(context,
-                      CupertinoPageRoute(builder: (context) => Homepage()));
+
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => const Homepage()));
                 })
           ],
         ),

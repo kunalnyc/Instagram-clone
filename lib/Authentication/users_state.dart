@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_single_cascade_in_expression_statements, unnecessary_this
+// ignore_for_file: unnecessary_this, avoid_single_cascade_in_expression_statements
 
 import 'dart:io';
 
@@ -14,12 +14,11 @@ import 'package:mobx/mobx.dart';
 // This is the class used by rest of your codebase
 class UsersState = _UsersState with _$UsersState;
 
-class _$UsersState {
-}
-
-
+class _$UsersState {}
 
 abstract class _UsersState with Store {
+  var _currentUser = FirebaseAuth.instance.currentUser?.uid;
+
   @observable
   Map<String, dynamic> users = ObservableMap();
   final ImagePicker _picker = ImagePicker();
@@ -30,6 +29,25 @@ abstract class _UsersState with Store {
   var _profilePicUrl;
   var _usersCollection = FirebaseFirestore.instance.collection('users');
 
+  @observable
+  String _searchUser = '';
+
+  @computed
+  List<dynamic> get people {
+    return users.entries
+        .where((user) => user.key != _currentUser)
+        .where((user) => user.value['username']
+            .toLowerCase()
+            .startsWith(_searchUser.toLowerCase()))
+        .map((e) => e.value)
+        .toList();
+  }
+
+  @action
+  setSearchTerm(String value) {
+    this._searchUser = value;
+  }
+
   @action
   initUsersListener() {
     FirebaseFirestore.instance.collection("users").snapshots().listen(
@@ -37,10 +55,11 @@ abstract class _UsersState with Store {
         snapshot.docs.forEach((doc) {
           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
           users[data['uid']] = {
-            'name': data['name'],
+            'username': data['username'],
             'phone': data['phone'],
             'status': data['status'],
-            'picture': data['picture']
+            'picture': data['photoUrl'],
+            'bio': data['bio']
           };
         });
       },
@@ -49,7 +68,7 @@ abstract class _UsersState with Store {
 
   void takeImageFromCamera() async {
     XFile? image =
-        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+        await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     imagefile = File(image!.path);
     _uploadFile();
   }
@@ -84,7 +103,6 @@ abstract class _UsersState with Store {
 
   void createOrUpdateUserInFirestore(String userName) {
     FirebaseAuth.instance.currentUser?.updateDisplayName(userName);
-    // ignore: prefer_typing_uninitialized_variables
     var docId;
     this._usersCollection
       ..where('uid', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
@@ -95,7 +113,7 @@ abstract class _UsersState with Store {
           //create user info in firestore use case
           if (querySnapshot.docs.isEmpty) {
             this._usersCollection.add({
-              'name': userName,
+              'username': userName,
               'phone': FirebaseAuth.instance.currentUser?.phoneNumber,
               'status': 'Available',
               'uid': FirebaseAuth.instance.currentUser?.uid,
@@ -107,7 +125,7 @@ abstract class _UsersState with Store {
           //update user info in firestore use case
           if (docId != null) {
             this._usersCollection.doc(docId).update({
-              'name': userName,
+              'username': userName,
               'phone': FirebaseAuth.instance.currentUser?.phoneNumber,
               'status': 'Available',
               'uid': FirebaseAuth.instance.currentUser?.uid,

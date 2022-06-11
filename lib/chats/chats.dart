@@ -5,6 +5,7 @@ import 'package:cupertino_list_tile/cupertino_list_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:real_chat/Themes/colors.dart';
 import 'package:real_chat/api/api.dart';
 import 'package:real_chat/chats/lib.dart';
 
@@ -37,14 +38,20 @@ class _ChatsState extends State<Chats> {
           builder: (BuildContext context) => CustomScrollView(
                 slivers: [
                   const CupertinoSliverNavigationBar(
-                    largeTitle: Text("Chats"),
+                    backgroundColor: mobileBackgroundColor,
+                    largeTitle: Text("Chats",style: TextStyle(color: CupertinoColors.white),),
+                    previousPageTitle: 'Home',
                   ),
                   SliverList(
                       delegate: SliverChildListDelegate(
                           chatState.messages.values.toList().map((data) {
                     return CupertinoListTile(
-                      title: Text(data['friendName']),
-                      subtitle: Text(data['msg']),
+                        //  leading: CircleAvatar(
+                        //         radius: 25,
+                        //         backgroundImage:
+                        //             NetworkImage(data['photoUrl'])),
+                      title: Text(data['friendName'],style: const TextStyle(color: Colors.white),),
+                      subtitle: Text(data['msg'],style: const TextStyle(color: Colors.pinkAccent),),
                       onTap: () => callChatDetailScreen(
                           context, data['friendName'], data['friendUid']),
                     );
