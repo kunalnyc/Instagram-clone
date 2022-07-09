@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Magenta Platforms
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Magenta-Platforms
+>>>>>>> 409350a5c3a293540278e8e9c2987d69e72b9aba
