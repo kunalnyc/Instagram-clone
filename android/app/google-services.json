@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "152289165194",
+    "project_id": "magenta-9e3ed",
+    "storage_bucket": "magenta-9e3ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152289165194:android:5b15ec77337df4e2811273",
+        "android_client_info": {
+          "package_name": "com.magenta.real_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152289165194-9354iptatdu9agt8ru32lfv0s6cme6pv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOh0Sy-ZxJp_0MIaWrLTtCrjSBI1NgldA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152289165194-9354iptatdu9agt8ru32lfv0s6cme6pv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
