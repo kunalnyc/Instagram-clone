@@ -1,0 +1,3 @@
+[submodule "Magenta-Platforms"]
+    path = Magenta-Platforms
+    url = https://github.com/kunalnyc/Magenta-Platforms.git
